@@ -1,21 +1,13 @@
 package com.example.chiku.reachinghands;
 
 public class InventorySingle {
-    String id,name;
+    String name;
     int current_count,threshold_count;
-    InventorySingle(String item_id, String name, int current_count){
-        this.id = item_id;
+    InventorySingle(String name, int current_count){
         this.name=name;
         this.current_count=current_count;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
