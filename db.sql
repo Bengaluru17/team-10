@@ -1,5 +1,5 @@
-create database if not exist RH_INVETORY;
-use RH_INVETORY;
+create database if not exist REACHING_HANDS;
+use REACHING_HANDS;
 create table if not exist INVENTORY
 	(
 		item_id varchar(15) primary key,
