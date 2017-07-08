@@ -12,7 +12,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SplashScreen">
@@ -22,8 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SantoshHome" />
-        <activity android:name=".AfterLogin"></activity>
+        <activity android:name=".RequestsForApproval" />
+        <activity android:name=".AfterLogin" />
+        <activity android:name=".ApprovedReq"></activity>
     </application>
 
 </manifest>
