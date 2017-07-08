@@ -33,7 +33,7 @@ public class InventoryList extends Fragment {
 
         recyclerView = (RecyclerView)view.findViewById(R.id.inventory_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inventoryAdaptor = new InventoryAdaptor();
+        inventoryAdaptor = new InventoryAdaptor(inventoryList);
         recyclerView.setAdapter(inventoryAdaptor);
         //inventoryAdaptor.notifyDataSetChanged();
         return view;
@@ -56,6 +56,10 @@ public class InventoryList extends Fragment {
     }
 
     private class InventoryAdaptor extends RecyclerView.Adapter<InventoryHolder>{
+        private List<InventorySingle> lst = new ArrayList<>();
+        InventoryAdaptor(List<InventorySingle> inven){
+            lst = inven;
+        }
 
         @Override
         public InventoryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -66,14 +70,14 @@ public class InventoryList extends Fragment {
 
         @Override
         public void onBindViewHolder(InventoryHolder holder, int position) {
-            InventorySingle inventorySingle = inventoryList.get(position);
+            InventorySingle inventorySingle = lst.get(position);
             Toast.makeText(getActivity(), inventorySingle.getName(), Toast.LENGTH_SHORT).show();
             holder.bindInventory(inventorySingle);
         }
 
         @Override
         public int getItemCount() {
-            return inventoryList.size();
+            return lst.size();
         }
     }
 }
