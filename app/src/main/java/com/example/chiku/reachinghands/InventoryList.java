@@ -19,12 +19,33 @@ public class InventoryList extends Fragment {
     RecyclerView recyclerView;
     InventoryAdaptor inventoryAdaptor;
     List<InventorySingle> inventoryList = new ArrayList<>();
+    private int tabNum;
+    private TextView tabName;
+
+    public static InventoryList newInstance(int tabNum){
+        Bundle args = new Bundle();
+        args.putInt("tab", tabNum);
+        InventoryList fragment = new InventoryList();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_inventory_list, container, false);
+        tabName = (TextView)view.findViewById(R.id.tabName);
 
+        tabNum = (int)getArguments().getInt("tab");
+        if(tabNum == 1){
+            tabName.setText("Boys");
+        }
+        else if(tabNum == 2){
+            tabName.setText("Girls");
+        }
+        else {
+            tabName.setText("Kitchen");
+        }
         //new inventories
         inventoryList.add(new InventorySingle("1","clothes", 25));
         inventoryList.add(new InventorySingle("2","clothes", 25));
@@ -71,7 +92,7 @@ public class InventoryList extends Fragment {
         @Override
         public void onBindViewHolder(InventoryHolder holder, int position) {
             InventorySingle inventorySingle = lst.get(position);
-            Toast.makeText(getActivity(), inventorySingle.getName(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), inventorySingle.getName(), Toast.LENGTH_SHORT).show();
             holder.bindInventory(inventorySingle);
         }
 
