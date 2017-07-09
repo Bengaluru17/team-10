@@ -1,6 +1,8 @@
 package com.example.chiku.reachinghands;
 
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +30,7 @@ public class InventoryList extends Fragment {
     List<InventorySingle> inventoryList = new ArrayList<>();
     private int tabNum;
     private TextView tabName;
+    private String aa="";
 
     public static InventoryList newInstance(int tabNum){
         Bundle args = new Bundle();
@@ -47,15 +57,20 @@ public class InventoryList extends Fragment {
             tabName.setText("Kitchen");
         }
         //new inventories
-        inventoryList.add(new InventorySingle("1","clothes", 25));
-        inventoryList.add(new InventorySingle("2","clothes", 25));
-        inventoryList.add(new InventorySingle("3","vegetables", 35));
-        inventoryList.add(new InventorySingle("4","bottles", 30));
+        /*inventoryList.add(new InventorySingle("clothes", 25));
+        inventoryList.add(new InventorySingle("clothes", 25));
+        inventoryList.add(new InventorySingle("vegetables", 35));
+        inventoryList.add(new InventorySingle("bottles", 30));*/
 
         recyclerView = (RecyclerView)view.findViewById(R.id.inventory_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        inventoryAdaptor = new InventoryAdaptor(inventoryList);
-        recyclerView.setAdapter(inventoryAdaptor);
+        //fething the data
+        AsyncFetchInventory asyncFetchInventory = new AsyncFetchInventory();
+        asyncFetchInventory.execute(new String[]{});
+
+
+        /*inventoryAdaptor = new InventoryAdaptor(inventoryList);
+        recyclerView.setAdapter(inventoryAdaptor);*/
         //inventoryAdaptor.notifyDataSetChanged();
         return view;
     }
@@ -100,5 +115,98 @@ public class InventoryList extends Fragment {
         public int getItemCount() {
             return lst.size();
         }
+    }
+
+    private class AsyncFetchInventory extends AsyncTask {
+
+        ProgressDialog pdLoading = new ProgressDialog(getActivity());
+        private char ch;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pdLoading.setMessage("\tLoading...");
+            pdLoading.setCancelable(false);
+            pdLoading.show();
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            //Toast.makeText(getActivity(), tabNum+"", Toast.LENGTH_SHORT).show();
+            String invenName="";
+            char currentCount='a';
+            //aa="hiiiiHello";
+
+            try{
+                String link = "http://10.0.2.2/ReachingHands.php";
+                String data="";
+                try {
+                    data = URLEncoder.encode("tabNum", "UTF-8")+"="+URLEncoder.encode(tabNum+"","UTF-8")+"&"+URLEncoder.encode("work", "UTF-8")+"="+URLEncoder.encode("retrieve","UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                //String data = "status=registered";
+
+                URL url = new URL(link);
+                URLConnection conn = url.openConnection();
+
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String sb = "";
+                String line = null;
+                // Read Server Response
+
+                int c = 1;
+                //String name="", address="", phone="", comments="";
+                while((line = rd.readLine()) != null) {
+                    //sb.append(line);
+                    sb = sb+line;
+                    //break;
+                }
+                //aa=sb+"    "+sb.length();
+                for(int i=0; i<sb.length(); i++){
+                    if(c == 1){
+                        if((ch=sb.charAt(i)) != '&'){
+                            invenName = invenName+ch;
+                        }
+                        else{
+                            c = 2;
+                            //Toast.makeText(getActivity(), invenName, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if(c == 2){
+                        if((ch=sb.charAt(i)) != '&'){
+                            currentCount = ch;
+                        }
+                        else{
+                            c = 1;
+                            InventorySingle inventorySingle = new InventorySingle(invenName, (int)currentCount);
+                            inventoryList.add(inventorySingle);
+                            invenName="";
+                            currentCount='a';
+                        }
+                    }
+
+                }
+                return sb;
+
+            } catch(Exception e){
+                return new String("Exception: " + e.getMessage());
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Object result){
+            inventoryAdaptor = new InventoryAdaptor(inventoryList);
+            recyclerView.setAdapter(inventoryAdaptor);
+            inventoryAdaptor.notifyDataSetChanged();
+            //tabName.setText(aa);
+            pdLoading.hide();
+        }
+
     }
 }
