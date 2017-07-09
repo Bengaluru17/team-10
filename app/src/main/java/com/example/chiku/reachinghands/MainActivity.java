@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     {
         String user=usr.getText().toString();
         String pass=pwd.getText().toString();
-        usr.setText(null);
-        pwd.setText(null);
         if(adminchck.isChecked())
         {
             if(user.equals("Santosh")&&pass.equals("Reaching"))
