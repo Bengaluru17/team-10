@@ -18,7 +18,7 @@ public class AfterLogin extends AppCompatActivity {
     }
     public void BtnApprovedReq(View view)
     {
-        startActivity(new Intent(getApplicationContext(),ApprovedReq.class));
+        startActivity(new Intent(getApplicationContext(),Purchase.class));
     }
     public void BtnReqForApproval(View view)
     {

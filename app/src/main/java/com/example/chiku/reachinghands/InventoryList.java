@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class InventoryList extends Fragment {
     InventoryAdaptor inventoryAdaptor;
     List<InventorySingle> inventoryList = new ArrayList<>();
     private int tabNum;
-    private TextView tabName;
+    private EditText tabName;
     private String aa="";
 
     public static InventoryList newInstance(int tabNum){
@@ -44,17 +45,17 @@ public class InventoryList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_inventory_list, container, false);
-        tabName = (TextView)view.findViewById(R.id.tabName);
+        tabName = (EditText) view.findViewById(R.id.tabName);
 
         tabNum = (int)getArguments().getInt("tab");
         if(tabNum == 1){
-            tabName.setText("Boys");
+            tabName.setText("BOYS DORM");
         }
         else if(tabNum == 2){
-            tabName.setText("Girls");
+            tabName.setText("GIRLS DORM");
         }
         else {
-            tabName.setText("Kitchen");
+            tabName.setText("KITCHEN");
         }
         //new inventories
         /*inventoryList.add(new InventorySingle("clothes", 25));

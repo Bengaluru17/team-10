@@ -25,7 +25,7 @@ public class RequestsForApproval extends AppCompatActivity {
     ListView lv;
     EditText ed1;
     ArrayAdapter<String> adapter;
-    String address = "http://192.168.43.201/cfg/GetData.php";
+    String address = "http://10.0.2.2/GetData.php";
     InputStream is = null;
     String line = null;
     String result = null;
@@ -121,11 +121,11 @@ public class RequestsForApproval extends AppCompatActivity {
 
             datalength = ja.length();
             // condata=new String[2*ja.length()];
-                int k =0;
+
             for (int i = 0; i < ja.length(); i++) {
                 jo=ja.getJSONObject(i);
                 data[i]=jo.getString("item_name");
-                //finaldata[i]=" ";
+                finaldata[i]=" ";
                 mycount[i]=jo.getString("current_count");
                 threshold[i]=jo.getString("threshold_count");
                 approv[i]=jo.getString("approval");
@@ -133,25 +133,25 @@ public class RequestsForApproval extends AppCompatActivity {
                 cv = Integer.parseInt(mycount[i]);
 
                 if(cv<=tv){
-                    finaldata[k]="";
-                    finaldata[k]=finaldata[k].concat(data[i]);
-                    finaldata[k]=finaldata[k].concat(" ");
-                    finaldata[k]=finaldata[k].concat(mycount[i]);
+                    //finaldata[k]="";
+                    finaldata[i]=finaldata[i].concat(data[i]);
+                    //finaldata[i]=finaldata[i].concat(" ");
+                    finaldata[i]=finaldata[i].concat(mycount[i]);
 
-                    k++;
+                    //k++;
 
                 }
                 //data[i]=data[i].concat(" ");
                 // data[i]=data[i].concat(threshold[i]);
             }
-            for(j=k;j<ja.length();j++){
-                finaldata[j]=finaldata[j].concat(" ");
+            //for(j=k;j<ja.length();j++) {
+            //  finaldata[j] = finaldata[j].concat(" ");
+            //}
 
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException e1) {
+            e1.printStackTrace();
         }
 
     }
+
 }

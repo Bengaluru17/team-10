@@ -4,11 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.chiku.reachinghands.InventoryList">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/tabName"
+        android:textAlignment="center"
+        android:fontFamily="serif-monospace"
+        android:textColor="#ffffff"
+        android:background="#33adff"
+        android:text="BOYS DORM"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabName"
-        android:text="hiiiiii"/>
+        android:text="ITEM NAME                                           QUANTITY AVAILABLE"/>
 
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"

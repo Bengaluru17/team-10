@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if(user.equals("Santosh")&&pass.equals("Reaching"))
             {
-                Intent i=new Intent(getApplicationContext(),Santosh_Admin.class);
+                Intent i=new Intent(getApplicationContext(),Finance.class);
                 startActivity(i);
             }
             else

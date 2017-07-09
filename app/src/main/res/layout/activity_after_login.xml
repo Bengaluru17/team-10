@@ -33,20 +33,21 @@
         android:textColor="#ffffff"
         android:background="#000000"
         android:elevation="8dp"
-        android:onClick="BtnApprovedReq"
+        android:onClick="BtnReqForApproval"
+
         />
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="APPROVED REQUEST"
+        android:text="PURCHASE ITEMS THAT ARE APPROVED"
         android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="#ffffff"
         android:background="#000000"
         android:elevation="8dp"
-        android:onClick="BtnReqForApproval"
+        android:onClick="BtnApprovedReq"
         />
 </LinearLayout>
