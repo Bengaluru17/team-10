@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.chiku.reachinghands.Purchase">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/approved_for_purchase_recycler_view">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Your bill here"
+        android:id="@+id/bill"
+        android:gravity="center"
+        />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:id="@+id/purchase_button"
+        android:text="Purchase"
+        android:textColor="#ffffff"
+        android:background="#000000"/>
+
+</LinearLayout>
