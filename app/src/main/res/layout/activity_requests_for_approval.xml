@@ -11,12 +11,39 @@
     tools:context="com.example.chiku.reachinghands.RequestsForApproval">
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="370dp"
         android:layout_marginLeft="7dp"
         android:layout_marginStart="7dp"
         android:id="@+id/listView1"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_width="match_parent" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter item"
+        android:ems="10"
+        android:layout_below="@+id/listView1"
+        android:layout_alignLeft="@+id/listView1"
+        android:layout_alignStart="@+id/listView1"
+
+        android:layout_marginTop="31dp"
+        android:id="@+id/editText2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_alignEnd="@+id/button2" />
+
+    <Button
+        android:text="Request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:onClick="btn_request"
+        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp" />
+
 </RelativeLayout>
